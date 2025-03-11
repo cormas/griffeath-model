@@ -1,5 +1,6 @@
 "
-GriModel is the Scheduler of the Griffeath""s Model
+GriModel is the Scheduler of the Griffeath""s Model.
+See: Fisch, R., Gravner, J. & Griffeath, D. Threshold-range scaling of excitable cellular automata. Stat Comput 1, 23–39 (1991). https://doi.org/10.1007/BF01890834
 "
 Class {
 	#name : 'GriModel',
@@ -25,7 +26,7 @@ GriModel class >> aboutThisModel [
 GriModel class >> initializeParameters [
 
 	super initializeParameters.
-	numberLines := 150.
+	numberLines := 80.
 	numberColumns := 150.
 ]
 
@@ -64,7 +65,8 @@ GriModel class >> prefix [
 ]
 
 { #category : 'initialization' }
-GriModel >> initRandomSpace [
+GriModel >> initRandomSpace_Moore [
+	"To be simulated with stepAverage. If you set the parameter 'nbOfStates' to 14 with threshold 3, you get beautiful movements"
 
 	<init>
 	self
@@ -72,6 +74,17 @@ GriModel >> initRandomSpace [
 		numberOfColumns: self class numberColumns
 		neighbourhood: 8
 		closed: false
+]
+
+{ #category : 'initialization' }
+GriModel >> initRandomSpace_VonNeuman [
+
+	<init>
+	self
+		createGridNumberOfRows: self class numberLines
+		numberOfColumns: self class numberColumns
+		neighbourhood: 4
+		closed: false 
 ]
 
 { #category : 'initialization' }
@@ -109,9 +122,21 @@ GriModel >> numberOf4s [
 	^ (self theCells select: [ :c | c state = 4 ]) size
 ]
 
-{ #category : 'stepping' }
-GriModel >> step [
-<control>
+{ #category : 'control' }
+GriModel >> stepAverage [
+	"Call successively #newStateAverage then #updateState for all the cells"
+
+	<control>
+	self cells do: [ :a | a newStateAverage ].
+	self cells do: [ :a | a updateState ]
+]
+
+{ #category : 'control' }
+GriModel >> stepStandard [
+	"Call successively #newState then #updateState for all the cells.
+	This step works well with the Von Neuman neigbourhood"
+
+	<control>
 	self stepSynchronouslyCA: 1
 ]
 
