@@ -88,8 +88,7 @@ GriCell >> newState [
 
 { #category : 'control' }
 GriCell >> newStateAverage [
-	"The current cell checks its state against the neighbors' states, and if 3 (threshold) or more neighbors have a state one to higher than the current cell, then the current cell changes to that state. 
-	To change, a cell in state i must have N cells in neighbours with state between (i+1) and (i + 3)
+	"The current cell in state i checks its state against the neighbors' states. If 3 (threshold) or more neighbors have a state between (i+1) and (i + nbStates/3), then the current cell changes to that state. 
 For example, if the current cell state is 2, and 3 of its  neighbors are in state 3 to 6, then the current cell changes its state to 3. "
 
 	| next max |
@@ -102,6 +101,20 @@ For example, if the current cell state is 2, and 3 of its  neighbors are in stat
 	(self neighbourhood select: [ :c | c state between: next and: max ])
 		size >= self class threshold
 		ifTrue: [ self bufferState: (self class states atWrap: state + 1) ]
+		ifFalse: [ self bufferState: state ]
+]
+
+{ #category : 'control' }
+GriCell >> newStateThreshold [
+
+	"This cell in state i changes to state i + 1 mod N (at the next time step) if it has N (threshold) neighbors that are in state i + 1 mod N, otherwise it remains in state i at the next time step. 
+	For example, if the current cell state is 3, and 3 of its  neighbors is in state 4, then the current cell changes its state to 4. Note that next state of 4 mod 4 is 1. This creates the cycle."
+
+	| next |
+	next := self class states atWrap: state + 1.
+	(self neighbourhood select: [ :c | c state = next ])
+		size >= self class threshold
+		ifTrue: [ self bufferState: next ]
 		ifFalse: [ self bufferState: state ]
 ]
 

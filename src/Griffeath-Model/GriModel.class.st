@@ -140,6 +140,15 @@ GriModel >> stepStandard [
 	self stepSynchronouslyCA: 1
 ]
 
+{ #category : 'control' }
+GriModel >> stepThreshold [
+	"Call successively #newStateThreshold then #updateState for all the cells"
+
+	<control>
+	self cells do: [ :a | a newStateThreshold ].
+	self cells do: [ :a | a updateState ]
+]
+
 { #category : 'accessing' }
 GriModel >> theCells [
 
