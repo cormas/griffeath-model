@@ -31,6 +31,12 @@ GriModel class >> initializeParameters [
 ]
 
 { #category : 'accessing' }
+GriModel class >> modelName [
+	
+	^ 'Griffeath'
+]
+
+{ #category : 'accessing' }
 GriModel class >> numberColumns [
 
 	<parameterGetter>
