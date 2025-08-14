@@ -19,7 +19,12 @@ Class {
 { #category : 'as yet unclassified' }
 GriModel class >> aboutThisModel [
 
-	^ ''
+	^ 'GriffeathModel — A cyclic cellular automaton inspired by David Griffeath’s work. Cells are arranged on a 2-D grid and cycle through states (e.g., 1 → 2 → 3 → 4 → 1) based on neighbor influence.  
+
+In the standard version, using a von Neumann (4-neighbor) neighborhood, a cell advances if *any* neighbor holds the next state in the cycle. Extended variants include:
+- A **threshold version** (Moore, 8-neighbor): a cell only advances if *at least three* neighbors are in the next state.  
+- A **range-of-states version**: a cell transitions if ≥ 3 neighbors occupy any state between (i+1) and (i + nbStates/3), allowing more flexible cyclic transitions.  
+This model demonstrates self-organized cyclic patterns and extensions via thresholds and multi-state ranges.'
 ]
 
 { #category : 'accessing' }
