@@ -5,9 +5,6 @@ See: Fisch, R., Gravner, J. & Griffeath, D. Threshold-range scaling of excitable
 Class {
 	#name : 'GriffeathModel',
 	#superclass : 'CMAbstractModel',
-	#instVars : [
-		'theCells'
-	],
 	#classInstVars : [
 		'numberLines',
 		'numberColumns'
@@ -110,39 +107,32 @@ GriffeathModel >> initRandomSpace_VonNeuman [
 		closed: false 
 ]
 
-{ #category : 'initialization' }
-GriffeathModel >> initialize [
-
-	super initialize.
-	theCells := OrderedCollection new
-]
-
 { #category : 'probes' }
 GriffeathModel >> numberOf1s [
 
 	<probeNamed: 'Number of yellow cells' color: 'FFFF00'>
-	^ (self theCells select: [ :c | c state = 1 ]) size
+	^ (self cells select: [ :c | c state = 1 ]) size
 ]
 
 { #category : 'probes' }
 GriffeathModel >> numberOf2s [
 
 	<probeNamed: 'Number of light orange cells' color: 'F19A0F'>
-	^ (self theCells select: [ :c | c state = 2 ]) size
+	^ (self cells select: [ :c | c state = 2 ]) size
 ]
 
 { #category : 'probes' }
 GriffeathModel >> numberOf3s [
 
 	<probeNamed: 'Number of orange cells' color: 'EC6C28'>
-	^ (self theCells select: [ :c | c state = 3 ]) size
+	^ (self cells select: [ :c | c state = 3 ]) size
 ]
 
 { #category : 'probes' }
 GriffeathModel >> numberOf4s [
 
 	<probeNamed: 'Number of red cells' color: 'FF0000'>
-	^ (self theCells select: [ :c | c state = 4 ]) size
+	^ (self cells select: [ :c | c state = 4 ]) size
 ]
 
 { #category : 'control' }
@@ -172,11 +162,4 @@ GriffeathModel >> stepThreshold [
 	<control>
 	self cells do: [ :a | a newStateThreshold ].
 	self cells do: [ :a | a updateState ]
-]
-
-{ #category : 'accessing' }
-GriffeathModel >> theCells [
-
-	<getterFor: #GriCell>
-	^ theCells 
 ]

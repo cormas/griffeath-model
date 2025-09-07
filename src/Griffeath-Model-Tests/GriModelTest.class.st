@@ -43,22 +43,22 @@ GriModelTest >> testNbOfStates [
 GriModelTest >> testOneStepAverage [
 	model stepAverage.
 	
-	self assert: (model theCells first state) equals: 1 .
-	self assert: (model theCells last state) equals: 4 .
+	self assert: (model cells first state) equals: 1 .
+	self assert: (model cells last state) equals: 4 .
 ]
 
 { #category : 'tests' }
 GriModelTest >> testOneStepStandard [
 	model stepStandard.
 	
-	self assert: (model theCells first state) equals: 2 .
-	self assert: (model theCells last state) equals: 4 .
+	self assert: (model cells first state) equals: 2 .
+	self assert: (model cells last state) equals: 4 .
 ]
 
 { #category : 'tests' }
 GriModelTest >> testOneStepThreshold [
 	model stepThreshold.
 	
-	self assert: (model theCells first state) equals: 1 .
-	self assert: (model theCells last state) equals: 4 .
+	self assert: (model cells first state) equals: 1 .
+	self assert: (model cells last state) equals: 4 .
 ]
