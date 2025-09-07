@@ -3,7 +3,9 @@ Cell is the unique class of the Griffeath model, with a state that can be 1, 2, 
 "
 Class {
 	#name : 'GriCell',
-	#superclass : 'CMSpatialEntityCell',
+	#superclass : 'CMCell',
+	#traits : 'TCMCellularAutomaton',
+	#classTraits : 'TCMCellularAutomaton classTrait',
 	#classInstVars : [
 		'nbOfStates',
 		'threshold'
