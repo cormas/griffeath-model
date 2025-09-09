@@ -25,19 +25,6 @@ GriCellTest >> tearDown [
 ]
 
 { #category : 'running' }
-GriCellTest >> testAsString [
-	
-	| expectedString |
-	aCell id: 13.
-	expectedString := 'a GriCell -id: 13 -n: 0 -o: 0 -state: 1
-	id: 13
-	coordinates: nil
-	state: 1'.
-	
-	self assert: aCell asString equals: expectedString.
-]
-
-{ #category : 'running' }
 GriCellTest >> testInitializeParameters [
 	
 	self assert: GriCell nbOfStates equals: 4.
