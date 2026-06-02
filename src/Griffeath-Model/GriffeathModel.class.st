@@ -151,7 +151,7 @@ GriffeathModel >> stepStandard [
 	This step works well with the Von Neuman neigbourhood"
 
 	<control>
-	self stepSynchronouslyCA: 1
+	self stepSynchronously
 ]
 
 { #category : 'control' }
