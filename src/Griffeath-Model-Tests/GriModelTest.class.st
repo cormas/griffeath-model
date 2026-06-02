@@ -11,9 +11,14 @@ Class {
 { #category : 'running' }
 GriModelTest >> setUp [
 
+	| context |
 	super setUp.
+	
+	context := CMSimulationContext new.
+	context randomSeed: 13.
+	
 	model := GriffeathModel new.
-	model randomNumberGenerator: (Random seed: 13).
+	model simulationContext: context.
 	
 	model 
 		createGridNumberOfRows: 3
@@ -32,11 +37,11 @@ GriModelTest >> tearDown [
 ]
 
 { #category : 'tests' }
-GriModelTest >> testNbOfStates [
+GriModelTest >> testNumberOfStates [
 
-	GriCell nbOfStates: 13.	
+	GriCell numberOfStates: 13.	
 		
-	self assert: GriCell nbOfStates equals: 13.
+	self assert: GriCell numberOfStates equals: 13.
 ]
 
 { #category : 'tests' }

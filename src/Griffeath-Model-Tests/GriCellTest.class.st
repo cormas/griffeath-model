@@ -10,10 +10,15 @@ Class {
 
 { #category : 'running' }
 GriCellTest >> setUp [
+	| context |
 	super setUp.
+	
+	context := CMSimulationContext new.
+	context randomSeed: 13.
+	
 	GriCell initializeParameters.
 	aCell := GriCell basicNew.
-	aCell randomNumberGenerator: (Random seed: 13).
+	aCell simulationContext: context.
 	aCell initialize
 ]
 
@@ -27,16 +32,16 @@ GriCellTest >> tearDown [
 { #category : 'running' }
 GriCellTest >> testInitializeParameters [
 	
-	self assert: GriCell nbOfStates equals: 4.
+	self assert: GriCell numberOfStates equals: 4.
 	self assert: GriCell threshold equals: 3.
 ]
 
 { #category : 'running' }
-GriCellTest >> testNbOfStates [
+GriCellTest >> testNumberOfStates [
 
-	GriCell nbOfStates: 13.	
+	GriCell numberOfStates: 13.	
 		
-	self assert: GriCell nbOfStates equals: 13.
+	self assert: GriCell numberOfStates equals: 13.
 ]
 
 { #category : 'running' }
