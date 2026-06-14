@@ -27,7 +27,7 @@ This model demonstrates self-organized cyclic patterns and extensions via thresh
 { #category : 'as yet unclassified' }
 GriffeathModel class >> documentationUrl [
 
-	^ 'https://cormas.org/#/griffeath-model'
+	^ 'https://cormas.org/models/griffeath'
 ]
 
 { #category : 'accessing' }
