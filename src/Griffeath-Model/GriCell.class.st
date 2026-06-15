@@ -7,7 +7,7 @@ Class {
 	#traits : 'TCMCellularAutomaton',
 	#classTraits : 'TCMCellularAutomaton classTrait',
 	#classInstVars : [
-		'nbOfStates',
+		'numberOfStates',
 		'threshold'
 	],
 	#category : 'Griffeath-Model',
@@ -15,29 +15,21 @@ Class {
 }
 
 { #category : 'accessing' }
-GriCell class >> initializeParameters [
-
-	super initializeParameters.
-	nbOfStates := 4.
-	threshold := 3
+GriCell class >> numberOfStates [
+	<parameterIntegerMin: 2 max: 6 Default: 4>
+	^ numberOfStates
 ]
 
 { #category : 'accessing' }
-GriCell class >> nbOfStates [
+GriCell class >> numberOfStates: anObject [
 
-	^ nbOfStates
-]
-
-{ #category : 'accessing' }
-GriCell class >> nbOfStates: anObject [
-
-	nbOfStates := anObject
+	numberOfStates := anObject
 ]
 
 { #category : 'accessing' }
 GriCell class >> states [
 
-	^ 1 to: self nbOfStates
+	^ 1 to: self numberOfStates
 ]
 
 { #category : 'accessing' }
@@ -54,7 +46,7 @@ GriCell class >> statesColors [
 
 { #category : 'accessing' }
 GriCell class >> threshold [
-
+	<parameterIntegerDefault: 3>
 	^ threshold
 ]
 
@@ -70,7 +62,7 @@ GriCell >> initialize [
 
 	super initialize.
 
-	state := self randomIntegerBetween: 1 and: (self class nbOfStates).
+	state := self randomIntegerBetween: 1 and: (self class numberOfStates).
 	bufferState := state
 ]
 
@@ -128,7 +120,7 @@ GriCell >> pov [
 				   colorValue: state
 				   min: 1
 				   color: Color yellow
-				   max: GriCell nbOfStates
+				   max: GriCell numberOfStates
 				   color: Color red).
 	"^ CMPointOfView color: (self class statesColors at: state)"
 ]

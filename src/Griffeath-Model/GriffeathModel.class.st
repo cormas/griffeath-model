@@ -5,9 +5,9 @@ See: Fisch, R., Gravner, J. & Griffeath, D. Threshold-range scaling of excitable
 Class {
 	#name : 'GriffeathModel',
 	#superclass : 'CMAbstractModel',
-	#classInstVars : [
-		'numberLines',
-		'numberColumns'
+	#instVars : [
+		'numberOfRows',
+		'numberOfColumns'
 	],
 	#category : 'Griffeath-Model',
 	#package : 'Griffeath-Model'
@@ -27,49 +27,13 @@ This model demonstrates self-organized cyclic patterns and extensions via thresh
 { #category : 'as yet unclassified' }
 GriffeathModel class >> documentationUrl [
 
-	^ 'https://cormas.org/#/griffeath-model'
-]
-
-{ #category : 'accessing' }
-GriffeathModel class >> initializeParameters [
-
-	super initializeParameters.
-	numberLines := 80.
-	numberColumns := 150.
+	^ 'https://cormas.org/models/griffeath'
 ]
 
 { #category : 'accessing' }
 GriffeathModel class >> modelName [
 	
 	^ 'Griffeath'
-]
-
-{ #category : 'accessing' }
-GriffeathModel class >> numberColumns [
-
-	<parameterGetter>
-	^ numberColumns
-]
-
-{ #category : 'accessing' }
-GriffeathModel class >> numberColumns: int [
-
-	<parameterSetter>
-	numberColumns := int
-]
-
-{ #category : 'accessing' }
-GriffeathModel class >> numberLines [
-
-	<parameterGetter>
-	^ numberLines
-]
-
-{ #category : 'accessing' }
-GriffeathModel class >> numberLines: int [
-
-	<parameterSetter>
-	numberLines := int
 ]
 
 { #category : 'as yet unclassified' }
@@ -90,8 +54,8 @@ GriffeathModel >> initRandomSpace_Moore [
 
 	<init>
 	self
-		createGridNumberOfRows: self class numberLines
-		numberOfColumns: self class numberColumns
+		createGridNumberOfRows: numberOfRows
+		numberOfColumns: numberOfColumns
 		neighbourhood: 8
 		closed: false
 ]
@@ -101,8 +65,8 @@ GriffeathModel >> initRandomSpace_VonNeuman [
 
 	<init>
 	self
-		createGridNumberOfRows: self class numberLines
-		numberOfColumns: self class numberColumns
+		createGridNumberOfRows: numberOfRows
+		numberOfColumns: numberOfColumns
 		neighbourhood: 4
 		closed: false 
 ]
@@ -135,6 +99,30 @@ GriffeathModel >> numberOf4s [
 	^ (self cells select: [ :c | c state = 4 ]) size
 ]
 
+{ #category : 'accessing' }
+GriffeathModel >> numberOfColumns [
+	<parameterIntegerMin: 1 max: 200 default: 150>
+	^ numberOfColumns
+]
+
+{ #category : 'accessing' }
+GriffeathModel >> numberOfColumns: anObject [
+
+	numberOfColumns := anObject
+]
+
+{ #category : 'accessing' }
+GriffeathModel >> numberOfRows [
+	<parameterIntegerMin: 1 max: 200 default: 80>
+	^ numberOfRows
+]
+
+{ #category : 'accessing' }
+GriffeathModel >> numberOfRows: anObject [
+
+	numberOfRows := anObject
+]
+
 { #category : 'control' }
 GriffeathModel >> stepAverage [
 	"Call successively #newStateAverage then #updateState for all the cells.
@@ -151,7 +139,7 @@ GriffeathModel >> stepStandard [
 	This step works well with the Von Neuman neigbourhood"
 
 	<control>
-	self stepSynchronouslyCA: 1
+	self stepSynchronously
 ]
 
 { #category : 'control' }
