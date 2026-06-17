@@ -16,7 +16,7 @@ Class {
 
 { #category : 'accessing' }
 GriCell class >> numberOfStates [
-	<parameterIntegerMin: 2 max: 6 Default: 4>
+	<parameterIntegerMin: 2 max: 6 default: 4>
 	^ numberOfStates
 ]
 
@@ -116,11 +116,10 @@ GriCell >> newStateThreshold [
 GriCell >> pov [
 
 	<pov>
-		^ CMPointOfView color: (self
+		^ CMPointOfView color: (CMColor
 				   colorValue: state
 				   min: 1
 				   color: Color yellow
 				   max: GriCell numberOfStates
 				   color: Color red).
-	"^ CMPointOfView color: (self class statesColors at: state)"
 ]
