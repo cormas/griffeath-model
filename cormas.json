@@ -1,0 +1,5 @@
+{
+	"baseline" : "GriffeathModel",
+	"summary" : "A cyclic cellular automaton after David Griffeath. Each cell cycles through four states and advances when a neighbour holds the next state, which makes self-organised spirals appear. Variants require a threshold of neighbours, or accept a range of next states.",
+	"cormas" : "1.0-dev"
+}
