@@ -56,6 +56,18 @@ GriCell class >> threshold: anObject [
 	threshold := anObject
 ]
 
+{ #category : 'aspects' }
+GriCell >> aspectDefault: look [
+
+	<aspect>
+	look
+		colorBetween: Color yellow
+		and: Color red
+		forValue: state
+		from: 1
+		to: GriCell numberOfStates
+]
+
 { #category : 'initialization' }
 GriCell >> initialize [
 	" Private - Set the receiver's internal state and bufferState. Initally a state can be randomly set to 1,2, 3 or 4 "
@@ -110,17 +122,4 @@ GriCell >> newStateThreshold [
 		size >= self class threshold
 		ifTrue: [ self bufferState: next ]
 		ifFalse: [ self bufferState: state ]
-]
-
-{ #category : 'pov' }
-GriCell >> pov [
-
-	<pov>
-		^ CMPointOfView color: (self
-				   colorValue: state
-				   min: 1
-				   color: Color yellow
-				   max: GriCell numberOfStates
-				   color: Color red).
-	"^ CMPointOfView color: (self class statesColors at: state)"
 ]
